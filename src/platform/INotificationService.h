@@ -4,6 +4,7 @@
 
 #ifndef TOMATOTIMER_INOTIFICATIONSERVICE_H
 #define TOMATOTIMER_INOTIFICATIONSERVICE_H
+#include <string>
 
 class INotificationService {
 public:
