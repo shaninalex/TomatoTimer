@@ -5,9 +5,15 @@
 #ifndef TOMATOTIMER_POMODOROSESSION_H
 #define TOMATOTIMER_POMODOROSESSION_H
 
+namespace core {
+    enum class SessionPhase {
+        Work,
+        ShortBreak,
+        LongBreak
+    };
 
-class PomodoroSession {
+    class PomodoroSession {
+    };
 };
-
 
 #endif //TOMATOTIMER_POMODOROSESSION_H

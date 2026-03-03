@@ -13,5 +13,6 @@ add_executable(TomatoTimer
         src/core/Timer.cpp
         src/core/Timer.h
         src/platform/INotificationService.h
-        src/platform/LinuxNotification.cpp
-        )
+        src/platform/DesktopNotificationService.cpp
+        src/platform/DesktopNotificationService.h
+)

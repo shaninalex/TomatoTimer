@@ -5,6 +5,7 @@
 #include "Timer.h"
 
 namespace core {
+
     Timer::Timer(seconds duration)
         : duration_(duration),
           elapsed_(seconds::zero()),

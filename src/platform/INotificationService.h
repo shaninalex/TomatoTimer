@@ -6,10 +6,12 @@
 #define TOMATOTIMER_INOTIFICATIONSERVICE_H
 #include <string>
 
-class INotificationService {
-public:
-    virtual void notify(std::string title, std::string body) = 0;
-    virtual ~INotificationService() = default;
-};
+namespace platform {
+    class INotificationService {
+    public:
+        virtual void notify(std::string title, std::string body);
+        virtual ~INotificationService() = default;
+    };
+}
 
 #endif //TOMATOTIMER_INOTIFICATIONSERVICE_H
