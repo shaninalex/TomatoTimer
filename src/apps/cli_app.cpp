@@ -3,39 +3,21 @@
 #include <chrono>
 
 #include "DesktopNotificationService.h"
+#include "PomodoroSession.h"
 #include "Timer.h"
 
 using namespace std::chrono_literals;
 
 int main() {
-    core::Timer timer(std::chrono::seconds(10));
+    core::PomodoroSession session;
 
-    platform::DesktopNotificationService notificationService;
-    notificationService.notify("This is test", "some test message a little bit longer then title");
+    session.start();
 
-    std::cout << "Starting 10-second timer...\n";
-
-    timer.start();
-
-    auto previous = core::Timer::clock::now();
-
-    while (timer.state() != core::TimerState::FINISHED) {
-        auto now = core::Timer::clock::now();
-        auto delta = std::chrono::duration_cast<std::chrono::seconds>(now - previous);
-
-        if (delta.count() > 0) {
-            timer.update(delta);
-            previous = now;
-
-            std::cout << "Remaining: "
-                      << timer.remaining().count()
-                      << " seconds\n";
-        }
-
-        std::this_thread::sleep_for(100ms);
+    while (true) {
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        session.update(std::chrono::seconds(1));
+        std::cout << "Remaining: "
+                  << session.remaining().count()
+                  << " seconds\n";
     }
-
-    notificationService.notify("Timer finished", "");
-
-    return 0;
 }
