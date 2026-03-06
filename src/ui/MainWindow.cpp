@@ -43,18 +43,31 @@ MainWindow::MainWindow(QWidget *parent)
     connect(resetButton, &QPushButton::clicked, this, &MainWindow::onResetClicked);
     connect(&tickTimer, &QTimer::timeout, this, &MainWindow::onTick);
     tickTimer.start(1000);
+
+    setWindowIcon(QIcon("../assets/icon.png"));
 }
 
 MainWindow::~MainWindow() = default;
 
 void MainWindow::onToggleClicked() {
-    core::TimerState state = session.timerState();
-    // TODO: make toggle ( "Start" switched to "Pause" based on state )
-    session.start();
+    if (session.timerState() == core::TimerState::IDLE) {
+        session.start();
+        toggleButton->setText("Pause");
+        setWindowTitle("Tomato Timer (running)");
+    } else if (session.timerState() == core::TimerState::RUNNING) {
+        session.pause();
+        toggleButton->setText("Resume");
+        setWindowTitle("Tomato Timer (paused)");
+    } else if (session.timerState() == core::TimerState::PAUSED) {
+        session.resume();
+        toggleButton->setText("Pause");
+        setWindowTitle("Tomato Timer (running)");
+    }
 }
 
 void MainWindow::onResetClicked() {
     session.reset();
+    setWindowTitle("Tomato Timer");
 }
 
 void MainWindow::onTick() {
