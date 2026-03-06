@@ -6,6 +6,10 @@
 #define TOMATOTIMER_MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QLabel>
+#include <QPushButton>
+#include <QTimer>
+#include "PomodoroSession.h"
 
 namespace ui {
 
@@ -16,6 +20,20 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+private slots:
+    void onToggleClicked();
+    void onResetClicked();
+
+    void onTick();
+
+private:
+    QLabel *timeLabel;
+    QPushButton *toggleButton;
+    QPushButton *resetButton;
+
+    QTimer tickTimer;
+    core::PomodoroSession session;
 };
 
 
